@@ -25,7 +25,18 @@ camera.position.y = 1
 function animate() {
   cube.rotation.x += 0.01;
   cube.rotation.y += 0.01;
-  
+
   renderer.render(scene, camera);
 }
-renderer.setAnimationLoop(animate);
+import WebGL from 'three/addons/capabilities/WebGL.js';
+
+if (WebGL.isWebGL2Available() ) {
+
+	// Initiate function or other initializations here
+	// animate();
+
+  renderer.setAnimationLoop(animate);
+} else {
+	const warning = WebGL.getWebGL2ErrorMessage();
+	document.getElementById( 'app' )?.appendChild( warning );
+}
